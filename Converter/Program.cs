@@ -91,7 +91,6 @@ namespace Converter
                 int i = 1;
                 while (i <= len)
                 {
-                    Console.WriteLine(res);
                     if (i % 4 == 0)
                     {
                         d += num[i - 1];
@@ -180,13 +179,14 @@ namespace Converter
                 int d = integer.Pop();
                 res = Switcher(res, d);
             }
-            res += ".";
+            if(decimalNum.Count != 0) 
+                res += ".";
             int i = 0;
             while (i < decimalNum.Count)
             {
                 int d = decimalNum[i];
-                i++;
                 res = Switcher(res, d);
+                i++;
             }
             return res;
         }
