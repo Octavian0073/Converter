@@ -47,22 +47,22 @@ namespace Converter
                 switch (d)
                 {
                     case 10:
-                        res = "A";
+                        res += "A";
                         break;
                     case 11:
-                        res = "B";
+                        res += "B";
                         break;
                     case 12:
-                        res = "C";
+                        res += "C";
                         break;
                     case 13:
-                        res = "D";
+                        res += "D";
                         break;
                     case 14:
-                        res = "E";
+                        res += "E";
                         break;
                     case 15:
-                        res = "F";
+                        res += "F";
                         break;
                 }
             }
@@ -78,49 +78,60 @@ namespace Converter
         private static string ConvertBinToHex(string num, int b1)
         {
             string res = ""; int len = num.Length;
-            if (len % 4 != 0)
+            while (len % 4 != 0)
+            {
                 num = "0" + num;
-            len = num.Length;
+                len = num.Length;
+            }
             if (len == 4)
                 res = ConvertToDecimal(num, b1).ToString();
             else
             {
-                string d1 = "";
-                string d2 = "";
-                int i = 0;
-                while (i < len)
+                string d = "";
+                int i = 1;
+                while (i <= len)
                 {
-                    if (i < len / 2)
-                        d1 += num[i];
-                    else d2 += num[i];
+                    Console.WriteLine(res);
+                    if (i % 4 == 0)
+                    {
+                        d += num[i - 1];
+                        res = Switcher(res, (int)ConvertToDecimal(d, b1));
+                        d = "";
+                    }
+                    else
+                        d += num[i - 1];
                     i++;
                 }
-                res = Switcher(res, (int)ConvertToDecimal(d1, b1)) + Switcher(res, (int)ConvertToDecimal(d2, b1));
             }
             return res;
         }
 
         private static string ConvertBinToOct(string num, int b1)
         {
-            string res; int len = num.Length;
-            if (len % 3 != 0)
+            string res = ""; int len = num.Length;
+            while (len % 3 != 0)
+            {
                 num = "0" + num;
-            len = num.Length;
+                len = num.Length;
+            }
             if(len == 3)
                 res = ConvertToDecimal(num, b1).ToString();
             else
             {
-                string d1 = "";
-                string d2 = "";
-                int i = 0;
-                while (i < len)
+                string d = "";
+                int i = 1;
+                while (i <= len)
                 {
-                    if(i < len / 2)
-                        d1 += num[i];
-                    else d2 += num[i];
+                    if(i % 3 == 0)
+                    { 
+                        d += num[i - 1];
+                        res = Switcher(res, (int)ConvertToDecimal(d, b1));
+                        d = "";
+                    }
+                    else
+                        d += num[i - 1];
                     i++;
                 }
-                res = Switcher(d1, (int)ConvertToDecimal(d1, b1)) + Switcher(d2, (int)ConvertToDecimal(d2, b1));
             }
             return res;
         }
@@ -137,7 +148,7 @@ namespace Converter
             foreach(char c in new_num)
             {
                 int index = digits.IndexOf(c, 0, fromBase);
-                res = res + index * (double)Math.Pow(fromBase, length - 1);
+                res += index * (double)Math.Pow(fromBase, length - 1);
                 length--;
             }
             return res;
