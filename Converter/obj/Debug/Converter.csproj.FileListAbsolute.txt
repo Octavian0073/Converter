@@ -1,0 +1,7 @@
+C:\Users\octav\source\repos\Converter\Converter\obj\Debug\Converter.csproj.AssemblyReference.cache
+C:\Users\octav\source\repos\Converter\Converter\obj\Debug\Converter.csproj.CoreCompileInputs.cache
+C:\Users\octav\source\repos\Converter\Converter\bin\Debug\Converter.exe.config
+C:\Users\octav\source\repos\Converter\Converter\bin\Debug\Converter.exe
+C:\Users\octav\source\repos\Converter\Converter\bin\Debug\Converter.pdb
+C:\Users\octav\source\repos\Converter\Converter\obj\Debug\Converter.exe
+C:\Users\octav\source\repos\Converter\Converter\obj\Debug\Converter.pdb
