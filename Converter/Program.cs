@@ -157,6 +157,9 @@ namespace Converter
         {
             Stack<int> integer = new Stack<int>();
             List <int> decimalNum = new List<int>();
+            List <double> periods = new List<double>();
+            bool hasPeriod = false;
+            int periodIdx = -1;
             string res = "";
             string[] halves = num.Split('.');
             int n1 = int.Parse(halves[0]);
@@ -168,11 +171,25 @@ namespace Converter
                 integer.Push(n1 % toBase);
                 n1 /= toBase;
             }
+            periods.Add(n2);
             while(n2 > 0)
             {
                 double result = n2 * toBase;
-                decimalNum.Add((int)result);
                 n2 = result - (int)result;
+                if (hasPeriod)
+                    continue;
+                foreach (double d in periods)
+                {
+                    string s = d.ToString();
+                    string n2s = n2.ToString();
+                    if (n2s.Contains(s) )
+                    {
+                        hasPeriod = true;
+                        periodIdx = periods.IndexOf(d);
+                    }
+                } 
+                decimalNum.Add((int)result);
+                periods.Add(n2);
             }
             while(integer.Count > 0)
             {
@@ -182,12 +199,17 @@ namespace Converter
             if(decimalNum.Count != 0) 
                 res += ".";
             int i = 0;
+
             while (i < decimalNum.Count)
             {
                 int d = decimalNum[i];
+                if (i == periodIdx)
+                    res += "(";
                 res = Switcher(res, d);
                 i++;
             }
+            if (hasPeriod)
+                res += ")";
             return res;
         }
     }
